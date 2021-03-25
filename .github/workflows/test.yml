@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - 'releases/*'
+      - 'test*'
 
 jobs:
   # unit tests
@@ -21,5 +22,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./
+      id: start
       with:
-        milliseconds: 1000
+        mode: start
+
+    - run: ./test.bash
+      env:
+        DATA1: ${{ steps.start.outputs.data1 }}
+        DATA2: ${{ steps.start.outputs.data2 }}
+
+    - uses: ./
+      with:
+        mode: finish
+
