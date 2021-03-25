@@ -31,7 +31,3 @@ jobs:
         DATA1: ${{ steps.start.outputs.data1 }}
         DATA2: ${{ steps.start.outputs.data2 }}
 
-    - uses: ./
-      with:
-        mode: finish
-
