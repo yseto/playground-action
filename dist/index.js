@@ -19,6 +19,10 @@ async function run() {
     if (mode === "finish") {
       core.info("finish");
     }
+
+    const json2 = JSON.stringify([{ a : 1, y : 2}, { a : 2, y : 3}]);
+    core.saveState("state1", 12345);
+    core.saveState("state2", json2);
   } catch (error) {
     core.setFailed(error.message);
   }
