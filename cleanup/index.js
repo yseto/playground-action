@@ -15,6 +15,7 @@ async function run() {
     const json2 = JSON.parse(state2);
     core.info(state1);
     core.info(json2);
+    console.log(json2);
   } catch (error) {
     core.setFailed(error.message);
   }
