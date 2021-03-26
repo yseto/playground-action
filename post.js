@@ -26,8 +26,8 @@ async function run() {
     await octokit.pulls.create({
       owner,
       repo,
-      head: `origin/${branchName}`,
-      base: 'origin/main',
+      head: `${owner}:${branchName}`,
+      base: 'main',
       body: message,
       title: "testing create PR",
     });
