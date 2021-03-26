@@ -1,8 +1,8 @@
 name: 'playground'
 description: 'playground'
 inputs:
-  mode:
-    description: 'mode'
+  token:
+    description: 'github token'
     required: true
 outputs:
   time: # output will be available to future steps

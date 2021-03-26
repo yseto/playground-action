@@ -1,21 +1,18 @@
 const core = require('@actions/core');
+const exec = require('@actions/exec');
 
 async function run() {
   try {
-    const mode = core.getInput('mode');
+    const token = core.getInput('token');
+    core.info("start");
 
-    if (mode === "start") {
-      const json = JSON.stringify([{ x : 1, y : 2}, { x : 2, y : 3}]);
-      core.setOutput('data1', json);
-      core.setOutput('data2', "hello");
-    }
-    if (mode === "finish") {
-      core.info("finish");
-    }
+    const seconds = Math.floor(Date.now() / 1000);
+    const branchName = `branch-${seconds}`;
+    await exec.exec('git', ['checkout', '-b', branchName]);
 
-    const json2 = JSON.stringify([{ a : 1, y : 2}, { a : 2, y : 3}]);
-    core.saveState("state1", 12345);
-    core.saveState("state2", json2);
+    core.saveState("seconds", seconds);
+    core.saveState("branchName", branchName);
+    core.saveState("token", token);
   } catch (error) {
     core.setFailed(error.message);
   }

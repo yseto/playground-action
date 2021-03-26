@@ -1,14 +1,36 @@
 const core = require('@actions/core');
+const exec = require("@actions/exec");
+const github = require("@actions/github");
+
+const fs = require("fs");
 
 async function run() {
   try {
     core.info("finish");
-    const state1 = core.getState("state1");
-    const state2 = core.getState("state2");
-    const json2 = JSON.parse(state2);
-    core.info(state1);
-    core.info(json2);
-    console.log(json2);
+
+    const token = core.getState("token");
+    const octokit = github.getOctokit(token);
+    const { repo: { owner, repo } } = github.context;
+
+    const seconds = core.getState("seconds");
+
+    const branchName = core.getState("branchName");
+
+    await fs.promises.writeFile("seconds.txt", `seconds: ${seconds}`, {encoding: "utf8"});
+
+    await exec.exec("git", ["add", "."]);
+    const message = `version: ${seconds}`;
+    await exec.exec('git', ['commit', '-m', message]);
+    await exec.exec('git', ['push', `origin/${branchName}`]);
+
+    await octokit.pulls.create({
+      owner,
+      repo,
+      head: `origin/${branchName}`,
+      base: 'origin/main',
+      body: message,
+      title: "testing create PR",
+    });
   } catch (error) {
     core.setFailed(error.message);
   }
