@@ -7118,7 +7118,7 @@ async function run() {
     await exec.exec("git", ["add", "."]);
     const message = `version: ${seconds}`;
     await exec.exec('git', ['commit', '-m', message]);
-    await exec.exec('git', ['push', `origin/${branchName}`]);
+    await exec.exec('git', ['push', 'origin', branchName]);
 
     await octokit.pulls.create({
       owner,
