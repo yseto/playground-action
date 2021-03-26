@@ -6,9 +6,9 @@
   "scripts": {
     "lint": "eslint .",
     "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
-    "prepare-cleanup": "ncc build cleanup.js -o cleanup --source-map --license licenses.txt",
+    "prepare-post": "ncc build post.js -o post --source-map --license licenses.txt",
     "test": "jest",
-    "all": "npm run lint && npm run prepare && npm run prepare-cleanup && npm run test"
+    "all": "npm run lint && npm run prepare && npm run prepare-post && npm run test"
   },
   "repository": {
     "type": "git",
