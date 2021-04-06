@@ -4,11 +4,12 @@ inputs:
   token:
     description: 'github token'
     required: true
+  mode:
+    description: 'start/finish'
+    required: true
 outputs:
   time: # output will be available to future steps
     description: 'The message to output'
 runs:
   using: 'node12'
   main: 'dist/index.js'
-  post: 'post/index.js'
-  post-if: 'success()'
