@@ -57,9 +57,14 @@ async function finish(token) {
 
     await exec.exec("git", ["add", "."]);
     const message = `version: ${seconds}`;
+    core.info(message);
+
+    core.info("commit");
     await exec.exec('git', ['commit', '-m', message]);
+    core.info("push");
     await exec.exec('git', ['push', 'origin', branchName]);
 
+    core.info("octokit.pulls.create");
     await octokit.pulls.create({
       owner,
       repo,
