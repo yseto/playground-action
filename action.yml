@@ -7,6 +7,12 @@ inputs:
   mode:
     description: 'start/finish'
     required: true
+  debug_context:
+    description: debug
+    required: false
+  debug_chdir:
+    description: debug
+    required: false
 outputs:
   time: # output will be available to future steps
     description: 'The message to output'
