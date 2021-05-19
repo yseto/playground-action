@@ -12,6 +12,11 @@ const fs = __nccwpck_require__(5747);
 
 async function run() {
   try {
+    const chdir = core.getInput("debug_chdir");
+    if (chdir) {
+      process.chdir(chdir);
+    }
+
     const token = core.getInput('token');
     const mode = core.getInput('mode');
 
@@ -38,7 +43,11 @@ async function start() {
 
 async function finish(token) {
     const octokit = github.getOctokit(token);
-    const { repo: { owner, repo } } = github.context;
+    const debugContext = core.getInput("debug_context");
+    const [tmp_owner, tmp_repo] = debugContext ? debugContext.split("/") : [null, null];
+
+    const owner = tmp_owner ? tmp_owner : github.context.repo.owner;
+    const repo =  tmp_repo  ? tmp_repo  : github.context.repo.repo;
 
     const seconds = core.getInput("seconds");
 
