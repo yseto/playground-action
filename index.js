@@ -37,7 +37,7 @@ async function start() {
 async function finish(token) {
     const octokit = github.getOctokit(token);
     const debugContext = core.getInput("debug_context");
-    const [tmp_owner, tmp_repo] = debugContext ? debugContext.split("/") ? [null, null];
+    const [tmp_owner, tmp_repo] = debugContext ? debugContext.split("/") : [null, null];
 
     const owner = tmp_owner ? tmp_owner : github.context.repo.owner;
     const repo =  tmp_repo  ? tmp_repo  : github.context.repo.repo;
