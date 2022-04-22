@@ -10,7 +10,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-    - uses: yseto/m-g-annotation
+    - uses: yseto/m-g-annotation@main
       with:
         title: test
         service: hobby
