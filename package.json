@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "prepare": "ncc build index.js -o dist --license licenses.txt",
+    "post": "ncc build post.js -o dist-post",
     "test": "jest",
-    "all": "npm run lint && npm run prepare && npm run test"
+    "all": "npm run lint && npm run prepare && npm run post && npm run test"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,8 @@
   "dependencies": {
     "@actions/core": "^1.2.5",
     "@actions/exec": "^1.0.4",
-    "@actions/github": "^4.0.0"
+    "@actions/github": "^4.0.0",
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.27.0",

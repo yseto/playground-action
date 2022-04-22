@@ -6,40 +6,16 @@ on:
         description: 'args'
         required: false
 
-env:
-  GIT_AUTHOR_NAME: yseto
-  GIT_AUTHOR_EMAIL: yseto@users.noreply.github.com
-  GIT_COMMITTER_NAME: yseto
-  GIT_COMMITTER_EMAIL: yseto@users.noreply.github.com
-
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
-    - uses: actions/checkout@v2
-      with:
-        repository: yseto/playground-git
-        path: var/playground-git
-        fetch-depth: 0
-
     - uses: ./
-      id: start
       with:
-        debug_chdir: var/playground-git
-        mode: start
+        title: test
+        service: hobby
+        apikey: ${{ secrets.apikey }}
 
-#   - run: echo $(date) >> date.txt && exit 1
-    - run: echo $(date) >> date.txt
-
-    - uses: ./
-      if: success()
-      with:
-        debug_chdir: var/playground-git
-        debug_context: yseto/playground-git
-        token: ${{ secrets.GITHUB_TOKEN }}
-        mode: finish
-        seconds: ${{ steps.start.outputs.seconds }}
-        branchName: ${{ steps.start.outputs.branchName }}
+    - run: sleep 10
 

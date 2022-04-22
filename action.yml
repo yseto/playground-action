@@ -1,21 +1,17 @@
 name: 'playground'
 description: 'playground'
 inputs:
-  token:
-    description: 'github token'
+  title:
+    description: title
     required: true
-  mode:
-    description: 'start/finish'
+  service:
+    description: service
     required: true
-  debug_context:
-    description: debug
-    required: false
-  debug_chdir:
-    description: debug
-    required: false
-outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+  apikey:
+    description: apikey
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
+  post: 'dist-post/index.js'
+
